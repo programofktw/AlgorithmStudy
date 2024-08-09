@@ -1,5 +1,13 @@
 package basic.star;
 
+
+/*
+     *
+    **
+   ***
+  ****
+ *****
+ */
 public class Star1 implements StarInterface{
     @Override
     public void StarPrint() {
