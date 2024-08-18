@@ -12,37 +12,6 @@ public class BaekJoon15779 {
         for(int i= 0;i<N;i++){
             input[i]= scan.nextInt();
         }
-//
-//        //big = false;
-//        //small = true;
-//        boolean frontBig;
-//        int maxLeng = 2;
-//        int testleng=2;
-//
-//        if(input[1]>=input[0]){
-//            frontBig = true;
-//        }
-//        else{
-//            frontBig = false;
-//        }
-//
-//        for(int i =2; i<N;i++){
-//            boolean isBig = input[i]>=input[i-1];
-//
-//            if(frontBig&&!isBig){
-//                testleng++;
-//                frontBig = false;
-//            }
-//            else if(!frontBig&&isBig){
-//                testleng++;
-//                frontBig = true;
-//            }
-//            else {
-//                if(testleng>maxLeng) maxLeng=testleng;
-//                testleng = 2;
-//            }
-//        }
-//        if(testleng>maxLeng) maxLeng = testleng;
 
         int maxleng = 2;
         int cnt = 2;
