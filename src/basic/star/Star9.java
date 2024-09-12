@@ -25,8 +25,8 @@ public class Star9 implements StarInterface{
             if(i%(onec)==size||i%(onec)==size+1) System.out.println("X");
             else{
                 for(int j = 0 ; j <width;j++){
-                    if(j%(onec)==size||j%(onec)==size+1) System.out.print("X");
-                    else System.out.print("O");
+                    if((j%(onec)>=0)&&(j%(onec)<=size-1)&&(i%(onec)==0||i%(onec)==size-1))System.out.print("O");
+                    else System.out.print("X");
                 }
                 System.out.println();
             }
