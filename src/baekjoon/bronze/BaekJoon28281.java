@@ -7,6 +7,7 @@ public class BaekJoon28281 {
     public static void main(String[] args){
         Scanner scan = new Scanner(System.in);
 
+
         int day = scan.nextInt();
         int wear = scan.nextInt();
 
