@@ -7,5 +7,6 @@ public class BaekJoon10171 {
 				+ "(  /  )\n"
 				+ " \\(__)|";
 		System.out.println(s);
+
 	}
 }
