@@ -8,15 +8,15 @@ public class Baekjoon1350 {
         Scanner scan = new Scanner(System.in);
 
         int fileNum = scan.nextInt();
-        BigInteger[] file = new BigInteger[fileNum];
+        String[] file = new String[fileNum];
         for(int i = 0 ; i<fileNum;i++){
-            file[i] = scan.nextBigInteger();
+            file[i] = scan.next();
         }
-        BigInteger clusterSize = scan.nextBigInteger();
+        String clusterSize = scan.next();
         BigInteger clusterNum=BigInteger.valueOf(0);
         for(int i = 0 ; i < fileNum;i++){
-           clusterNum = clusterNum.add(BigInteger.valueOf((long)Math.ceil(Double.parseDouble(file[i].toString())/Double.parseDouble(clusterSize.toString()))));
+           clusterNum = clusterNum.add(BigInteger.valueOf((long)Math.ceil(Double.parseDouble(file[i])/Double.parseDouble(clusterSize))));
         }
-        System.out.print(clusterSize.multiply(clusterNum));
+        System.out.print(BigInteger.valueOf(Long.parseLong(clusterSize)).multiply(clusterNum));
     }
 }
