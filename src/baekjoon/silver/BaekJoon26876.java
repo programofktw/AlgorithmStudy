@@ -1,25 +1,21 @@
 package baekjoon.silver;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.util.StringTokenizer;
+import java.io.*;
 
 public class BaekJoon26876 {
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
 
+        String first = br.readLine();
 
+        int FH = Integer.parseInt(first.substring(0,2));
+        int FM = Integer.parseInt(first.substring(3));
 
-        StringTokenizer st = new StringTokenizer(br.readLine(),":");
+        String second = br.readLine();
 
-        int FH = Integer.parseInt(st.nextToken().trim());
-        int FM = Integer.parseInt(st.nextToken().trim());
-
-        st = new StringTokenizer(br.readLine(),":");
-
-        int SH = Integer.parseInt(st.nextToken());
-        int SM = Integer.parseInt(st.nextToken());
+        int SH = Integer.parseInt(second.substring(0,2));
+        int SM = Integer.parseInt(second.substring(3));
 
 
         int DM = SM - FM;
@@ -31,6 +27,10 @@ public class BaekJoon26876 {
 
         int DH = ((SH-FH)>=0)?(SH-FH):24+(SH-FH);
 
-        System.out.println((DH+DM));
+        bw.write(String.valueOf(DM+DH));
+
+        br.close();
+        bw.flush();
+        bw.close();
     }
 }
