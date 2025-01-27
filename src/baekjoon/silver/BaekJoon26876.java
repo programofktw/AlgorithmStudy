@@ -6,7 +6,6 @@ public class BaekJoon26876 {
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
-
         String first = br.readLine();
 
         int FH = Integer.parseInt(first.substring(0,2));
