@@ -7,7 +7,7 @@ public class SortMain {
     static Scanner scan = new Scanner(System.in);
     public static void main(String[] args){
 
-        Sort sort = new Select();
+        Sort sort = new Insert();
 
         int[] array;
 
