@@ -1,4 +1,6 @@
-package basic.sort;
+package basic.sort.impl;
+
+import basic.sort.Sort;
 
 /*
 삽입 정렬
@@ -8,7 +10,7 @@ package basic.sort;
 - 최악의 경우 O(n^2)의 시간 복잡도를 가지지만 정렬이 되어있는 경우 빠를 수도 있음
     = 근데 정렬이 되어 있을 것이라는 보장이 없기에 퀵 정렬이 더 좋음.
  */
-public class Insert implements Sort{
+public class Insert implements Sort {
 
 
     @Override
