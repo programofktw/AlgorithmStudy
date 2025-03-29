@@ -26,7 +26,7 @@ public class BaekJoon5430 {
 
     public static void testCase() throws IOException {
         boolean reverse = false;
-
+        boolean error = false;
         String commands = br.readLine();
 
         int arrayNum = Integer.parseInt(br.readLine());
@@ -51,28 +51,35 @@ public class BaekJoon5430 {
             }else if(command.equals("D")){
                 if(arrayList.isEmpty()){
                     output.append("error").append("\n");
+                    error = true;
                     break;
                 }
                 else{
                     if(reverse){
-                        arrayList.remove(arrayList.size()-2);
+                        arrayList.remove(arrayList.size()-1);
                     }else{
                         arrayList.remove(0);
                     }
                 }
             }
         }
-
-        insertArrayResult(arrayList);
+        if(!error) insertArrayResult(arrayList, reverse);
     }
 
-    public static void insertArrayResult(ArrayList<Integer> arrayList){
+    public static void insertArrayResult(ArrayList<Integer> arrayList,boolean reverse){
 
         output.append("[");
 
-        for(int a : arrayList){
-            output.append(a).append(",");
+        if(reverse){
+            for(int i = arrayList.size()-1;i>=0;i--){
+                output.append(arrayList.get(i)).append(",");
+            }
+        }else{
+            for(int a : arrayList){
+                output.append(a).append(",");
+            }
         }
+        if(!arrayList.isEmpty()) output.deleteCharAt(output.length()-1);
         output.append("]").append("\n");
     }
 }
