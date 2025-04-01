@@ -16,9 +16,10 @@ public class BaekJoon10026 {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 
 
-        String[] lines = new String[100];
+        N = Integer.parseInt(br.readLine());
 
-        N = input(lines, br);
+        String[] lines = new String[N];
+        input(lines, br);
 
         char[][] colors = new char[N][N];
 
@@ -29,22 +30,20 @@ public class BaekJoon10026 {
         findArea(colors);
 
         redGreen =true;
+
+        visited = new boolean[N][N];
+
+        findArea(colors);
     }
 
 
-    public static int input(String[] lines,BufferedReader br) throws IOException {
-        int N = 0;
+    public static void input(String[] lines,BufferedReader br) throws IOException {
 
         //입력 받기
-        while(true){
-            String input = br.readLine();
-
-            if(input==null) break;
+        for(int i = 0;i<N;i++){
             //N X N의 입력
-            lines[N++] = input;
+            lines[i] = br.readLine();
         }
-
-        return N;
     }
 
     public static void transportInput(String[] lines, char[][] colors){
@@ -76,14 +75,32 @@ public class BaekJoon10026 {
 
         char color = colors[h][w];
 
-        if(h-1>=0&&color == colors[h-1][w]){
+        if(h-1>=0&&!visited[h-1][w]&&sameSite(color,colors[h-1][w])){
             bfs(colors,h-1,w);
         }
-        if(h+1<N && colors[h+1][w] == color){
+        if(h+1<N &&!visited[h+1][w] && sameSite(color,colors[h+1][w])){
             bfs(colors,h+1,w);
         }
-        if(w-1>=0&&color == colors[h][w-1]){
+        if(w-1>=0 &&!visited[h][w-1] &&sameSite(color,colors[h][w-1])){
+            bfs(colors,h,w-1);
+        }
+        if(w+1<N &&!visited[h][w+1] &&sameSite(color,colors[h][w+1])){
+            bfs(colors,h,w+1);
+        }
+    }
 
+    public static boolean sameSite(char main, char comp){
+        if(redGreen){
+            if(main=='B' && main==comp){
+                return true;
+            }else if((main =='R'||main=='G')&&(comp =='R'||comp=='G')){
+                return true;
+            }
+            else{
+                return false;
+            }
+        }else{
+            return main == comp;
         }
     }
 
