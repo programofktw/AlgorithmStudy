@@ -2,6 +2,7 @@ package basic.sort;
 
 import basic.sort.impl.Bubble;
 import basic.sort.impl.Insert;
+import basic.sort.impl.Merge;
 
 import java.util.Scanner;
 
@@ -10,7 +11,7 @@ public class SortMain {
     static Scanner scan = new Scanner(System.in);
     public static void main(String[] args){
 
-        Sort sort = new Bubble();
+        Sort sort = new Merge();
 
         int[] array;
 
