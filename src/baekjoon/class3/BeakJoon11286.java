@@ -25,7 +25,13 @@ public class BeakJoon11286 {
     public static void main(String[] args) throws IOException {
         int testCaseNum = Integer.parseInt(br.readLine());
 
-        for(int i=0;i<testCaseNum;i++){
+        extracted(testCaseNum);
+
+        System.out.print(sb);
+    }
+
+    private static void extracted(int testCaseNum) throws IOException {
+        for(int i = 0; i< testCaseNum; i++){
             int command = Integer.parseInt(br.readLine());
 
             if(command ==0){
@@ -35,7 +41,5 @@ public class BeakJoon11286 {
                 pq.add(command);
             }
         }
-
-        System.out.print(sb);
     }
 }
