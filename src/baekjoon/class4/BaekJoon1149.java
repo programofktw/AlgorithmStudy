@@ -3,7 +3,7 @@ package baekjoon.class4;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.Scanner;
+
 
 
 /*
@@ -15,13 +15,15 @@ N 개의 집을 RGB로 칠하는데 드는 각각 비용이 주어질때,
 public class BaekJoon1149 {
 
     static int[][] cost;
-
+    static int[][] rowCost;
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 
         int N = Integer.parseInt(br.readLine());
 
         cost = new int[N][3];
+
+        rowCost = new int[N][3];
 
         for(int i = 0 ;i<cost.length;i++){
             String[] costs = br.readLine().split(" ");
@@ -45,13 +47,14 @@ public class BaekJoon1149 {
     //nowColor : 지금 칠할 색(R0,G1,B2), index: 몇번째 집(0부터 카운트)인지.
     public static int backTraking(int nowColor,int index){
         if(cost.length==index) return 0;
-
+        if(rowCost[index][nowColor] != 0) return rowCost[index][nowColor];
         int min = Integer.MAX_VALUE;
 
         for(int i =0;i<3;i++){
             if(nowColor!=i) min = Math.min(min,backTraking(i,index+1));
         }
 
+        rowCost[index][nowColor] = min + cost[index][nowColor];
         return cost[index][nowColor] +min;
 
     }
