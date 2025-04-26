@@ -58,7 +58,6 @@ public class BaekJoon1043 {
                 party.add(scan.nextInt());
             }
 
-
             // 파티 내 사람들 연결시키기
             for (int j = 0; j < party.size(); j++) {
                 for (int k = j + 1; k < party.size(); k++) {
