@@ -10,47 +10,41 @@ import java.util.Scanner;
  */
 public class BaekJoon15649 {
 
-    static StringBuilder result = new StringBuilder();
-    static boolean[] visited;
-    static int[] arr;
-
+    private static int depth;
+    private static int N;
+    private static boolean visited[];
+    private static StringBuilder sb= new StringBuilder();
     public static void main(String[] args){
-
         Scanner scan = new Scanner(System.in);
 
-        int N = scan.nextInt();
+        N = scan.nextInt();
 
-        int M = scan.nextInt();
+        depth= scan.nextInt();
 
-        visited = new boolean[N];
 
-        arr = new int[M];
-
-        dfs(N,M,0);
-
-        System.out.print(result);
-
-    }
-
-    public static void dfs(int N, int M, int depth){
-        if(M==depth){
-            for(int val : arr){
-                result.append(val).append(" ");
-            }
-            result.append("\n");
+        for(int i= 1;i<=N;i++){
+            visited = new boolean[N];
+            visited[i-1]= true;
+            dfs(i+"",1);
         }
 
-        else{
-            for(int i =0;i<N;i++){
-                if(!visited[i]){
-                    visited[i] = true;
-                    arr[depth] = i+1;
-                    dfs(N,M,depth+1);
+        System.out.print(sb);
+    }
 
 
-                    visited[i] = false;
-                }
+    public static void dfs(String arr,int dep){
+        if(dep==depth){
+            sb.append(arr).append("\n");
+            return;
+        }
+
+        for(int i=1;i<=N;i++){
+            if(!visited[i-1]){
+                visited[i-1] = true;
+                dfs(arr+" "+i,dep+1);
+                visited[i-1] = false;
             }
         }
     }
+
 }
