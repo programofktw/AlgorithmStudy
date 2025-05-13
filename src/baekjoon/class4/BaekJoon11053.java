@@ -1,24 +1,36 @@
 package baekjoon.class4;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.Scanner;
+import java.util.StringTokenizer;
 
 /*
 가장 긴 증가하는 부분 수열 문제
 
 순서대로 탐색하되 현재를 포함할 지 말지를 둘 다 실행
+
+=> 시간 초과 발생.
+=> 시도 1. 입력의 시간을 줄여보기
  */
 public class BaekJoon11053 {
 
     static int[] array;
-    static int N;
-    public static void main(String[] args){
-        Scanner scan = new Scanner(System.in);
 
-        N  =scan.nextInt();
+    static int N;
+    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        N  = Integer.parseInt(br.readLine());
         array = new int[N];
-        for(int i = 0 ; i<N;i++){
-            array[i] = scan.nextInt();
+
+        StringTokenizer input = new StringTokenizer(br.readLine(), " ");
+
+        int i = 0;
+        while(input.hasMoreTokens()){
+            array[i++] = Integer.parseInt(input.nextToken());
         }
+
 
         int contain = backTraking(1,array[0],1);
         int notContain = backTraking(1,0,0);
