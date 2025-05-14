@@ -11,20 +11,35 @@ public class BaekJoon11725 {
     static HashMap<Integer, List<Integer>> graph = new HashMap<>();
     static boolean[] visited;
     static int[] parent;
-    static int searchNodeNum = 0;
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         StringBuilder sb = new StringBuilder();
 
         int node = Integer.parseInt(br.readLine());
 
-        for(int i = 1;i<=node;i++){
-            graph.put(i,new ArrayList<>());
+        initGraph(node);
+
+
+        inputGraph(node, br);
+
+
+        visited[1] = true;
+        dfs(1);
+
+        printResult(node, sb);
+
+    }
+
+    private static void printResult(int node, StringBuilder sb) {
+        for(int i = 2; i<= node; i++){
+            sb.append(parent[i]).append("\n");
         }
 
-        visited =  new boolean[node+1];
-        parent = new int[node+1];
-        for(int i=0;i<node-1;i++){
+        System.out.print(sb);
+    }
+
+    private static void inputGraph(int node, BufferedReader br) throws IOException {
+        for(int i = 0; i< node -1; i++){
             String[] lines = br.readLine().split(" ");
 
             int node1 = Integer.parseInt(lines[0]);
@@ -35,26 +50,24 @@ public class BaekJoon11725 {
 
             graph.get(node2).add(node1);
         }
-        visited[1] = true;
-        searchNodeNum++;
-        dfs(1,node);
+    }
 
-        for(int i = 2 ; i<=node;i++){
-            sb.append(parent[i]).append("\n");
+    private static void initGraph(int node) {
+        for(int i = 1; i<= node; i++){
+            graph.put(i,new ArrayList<>());
         }
 
-        System.out.print(sb);
+        visited =  new boolean[node+1];
+        parent = new int[node+1];
     }
 
 
-    static void dfs(int node, int endPoint){
-        if(searchNodeNum==endPoint) return;
-
+    static void dfs(int node){
         for(int search : graph.get(node)){
             if(!visited[search]){
                 visited[search] = true;
                 parent[search] = node;
-                dfs(search,endPoint);
+                dfs(search);
             }
         }
     }
