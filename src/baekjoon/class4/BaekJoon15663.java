@@ -3,14 +3,17 @@ package baekjoon.class4;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.StringTokenizer;
 
 public class BaekJoon15663 {
 
     static int[] array;
     static boolean[] visited;
+
+    static Map<Integer, Integer> input= new HashMap<>();
     static int N;
     static int M;
 
@@ -34,10 +37,18 @@ public class BaekJoon15663 {
         //정렬
         Arrays.sort(array);
 
-        for(int j = 0 ; j<N;j++){
-            visited[j] = true;
-            dfs(1,array[j]+"");
-            visited[j] = false;
+        for(int num : array){
+            if(input.containsKey(num)){
+                input.put(num,input.get(num)+1);
+            }else{
+                input.put(num,1);
+            }
+        }
+
+        for(int num : input.keySet()){
+            input.put(num,input.get(num)-1);
+            dfs(1,num+"");
+            input.put(num,input.get(num)+1);
         }
     }
 
@@ -45,10 +56,11 @@ public class BaekJoon15663 {
         if(depth==M) System.out.println(now);
 
         else{
-            for(int i = 0;i<N;i++){
-                if(!visited[i]){
-                    visited[i] = true;
-                    dfs(depth+1,now+" "+array[i]);
+            for(int num : input.keySet()){
+                if(input.get(num)>0){
+                    input.put(num,input.get(num)-1);
+                    dfs(depth+1,now+" "+num);
+                    input.put(num,input.get(num)+1);
                 }
             }
         }
