@@ -7,18 +7,18 @@ import java.util.StringTokenizer;
 
 public class BaekJoon16953 {
 
-    static int B;
+    static long B;
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 
         StringTokenizer st = new StringTokenizer(br.readLine());
-        int A = Integer.parseInt(st.nextToken());
-        B = Integer.parseInt(st.nextToken());
+        long A = Long.parseLong(st.nextToken());
+        B = Long.parseLong(st.nextToken());
 
         solved(A);
     }
 
-    public static void solved(int now){
+    public static void solved(long now){
 
         int result;
 
@@ -34,7 +34,7 @@ public class BaekJoon16953 {
 
     }
 
-    public static int backTraking(int now,int depth){
+    public static int backTraking(long now,int depth){
         if(now > B){
             return -1;
         }
