@@ -3,11 +3,16 @@ package baekjoon.class4;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.LinkedList;
+import java.util.Queue;
 import java.util.StringTokenizer;
 
 public class BaekJoon16953 {
 
     static long B;
+
+    static Queue<Temp> bfsQueue = new LinkedList<>();
+
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 
@@ -18,38 +23,37 @@ public class BaekJoon16953 {
         solved(A);
     }
 
-    public static void solved(long now){
+    public static void solved(long A){
+        bfsQueue.add(new Temp(A,0));
 
-        int result;
+        long result = -1;
 
+        while(!bfsQueue.isEmpty()){
+            Temp now = bfsQueue.poll();
 
-        int result1 = dfs(now*10+1,1);
-        int result2 = dfs(now*2,1);
+            if(now.now==B){
+                result = now.depth+1;
+                break;
+            }
 
-        if(result1 == -1&&result2==-1) result= -1;
-        else if(result1==-1)result = result2;
-        else if(result2==-1) result = result1;
-        else result = Math.min(result2,result1);
+            if(now.now*2<=B){
+                bfsQueue.add(new Temp(now.now*2, now.depth+1));
+            }
+            if(now.now*10+1<=B){
+                bfsQueue.add(new Temp(now.now*10+1, now.depth+1));
+            }
+        }
 
-        System.out.print((result!=-1)?result+1:-1);
-
+        System.out.println(result);
     }
 
-    public static int dfs(long now, int depth){
-        if(now > B){
-            return -1;
+    static class Temp{
+        long now;
+        int depth;
+
+        private Temp(long now, int depth){
+            this.now= now;
+            this.depth = depth;
         }
-        if(now == B) return depth;
-        int result;
-
-        int result1 = dfs(now*10+1,depth+1);
-        int result2 = dfs(now*2,depth+1);
-
-        if(result1 == -1&&result2==-1) result= -1;
-        else if(result1==-1)result = result2;
-        else if(result2==-1) result = result1;
-        else result = Math.min(result2,result1);
-
-        return result;
     }
 }
