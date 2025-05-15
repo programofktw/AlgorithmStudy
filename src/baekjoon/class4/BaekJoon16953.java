@@ -22,8 +22,9 @@ public class BaekJoon16953 {
 
         int result;
 
-        int result1 = backTraking(now*10+1,1);
-        int result2 = backTraking(now*2,1);
+
+        int result1 = dfs(now*10+1,1);
+        int result2 = dfs(now*2,1);
 
         if(result1 == -1&&result2==-1) result= -1;
         else if(result1==-1)result = result2;
@@ -34,15 +35,15 @@ public class BaekJoon16953 {
 
     }
 
-    public static int backTraking(long now,int depth){
+    public static int dfs(long now, int depth){
         if(now > B){
             return -1;
         }
         if(now == B) return depth;
         int result;
 
-        int result1 = backTraking(now*10+1,depth+1);
-        int result2 = backTraking(now*2,depth+1);
+        int result1 = dfs(now*10+1,depth+1);
+        int result2 = dfs(now*2,depth+1);
 
         if(result1 == -1&&result2==-1) result= -1;
         else if(result1==-1)result = result2;
