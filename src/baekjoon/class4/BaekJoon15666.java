@@ -34,18 +34,11 @@ public class BaekJoon15666 {
 
         st = new StringTokenizer(br.readLine());
 
-        int[] inputs = new int[N];
-
-        int i  =0;
         while(st.hasMoreTokens()){
-            inputs[i++] = (Integer.parseInt(st.nextToken()));
+            nums.add(Integer.parseInt(st.nextToken()));
         }
 
 
-        //중복을 제거 및 정렬
-        for(int num : inputs){
-            nums.add(num);
-        }
 
         solved();
 
