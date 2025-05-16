@@ -10,6 +10,8 @@ public class BaekJoon1991 {
 
     static Map<Character, Child> tree = new HashMap<>();
 
+    static StringBuilder sb = new StringBuilder();
+
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 
@@ -33,16 +35,12 @@ public class BaekJoon1991 {
             tree.put(parent,child);
 
         }
-
         preOrder('A');
-
-        System.out.println();
-
+        sb.append("\n");
         inOrder('A');
-
-        System.out.println();
+        sb.append("\n");
         postOrder('A');
-
+        System.out.print(sb);
     }
 
     //전위 순회
@@ -50,7 +48,7 @@ public class BaekJoon1991 {
 
         Child child = tree.get(now);
 
-        System.out.print(now);
+        sb.append(now);
         if(child.left!=null) preOrder(child.left);
         if(child.right!=null) preOrder(child.right);
 
@@ -62,7 +60,7 @@ public class BaekJoon1991 {
 
         Child child = tree.get(now);
         inOrder(child.left);
-        System.out.print(now);
+        sb.append(now);
         inOrder(child.right);
     }
 
@@ -73,15 +71,13 @@ public class BaekJoon1991 {
         Child child = tree.get(now);
         postOrder(child.left);
         postOrder(child.right);
-        System.out.print(now);
+        sb.append(now);
     }
 
 
     private static class Child{
         Character left;
         Character right;
-
-
     }
 
 }
