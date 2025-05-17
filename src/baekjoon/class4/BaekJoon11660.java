@@ -16,7 +16,7 @@ public class BaekJoon11660 {
 
         StringTokenizer st = new StringTokenizer(br.readLine());
 
-
+        StringBuilder answer = new StringBuilder();
 
         int N = Integer.parseInt(st.nextToken());
 
@@ -40,13 +40,13 @@ public class BaekJoon11660 {
             StringTokenizer testCase = new StringTokenizer(br.readLine());
 
             int result = 0;
-            int startX = Integer.parseInt(testCase.nextToken())-1;
-
             int startY = Integer.parseInt(testCase.nextToken())-1;
 
-            int endX = Integer.parseInt(testCase.nextToken())-1;
+            int startX = Integer.parseInt(testCase.nextToken())-1;
 
             int endY = Integer.parseInt(testCase.nextToken())-1;
+
+            int endX = Integer.parseInt(testCase.nextToken())-1;
 
             for(int y = startY; y<=endY;y++){
                 if(startX-1<0){
@@ -55,9 +55,11 @@ public class BaekJoon11660 {
                     result += dp[y][endX] - dp[y][startX-1];
                 }
             }
-            System.out.println(result);
+            answer.append(result).append("\n");
 
         }
+
+        System.out.print(answer);
 
 
     }
