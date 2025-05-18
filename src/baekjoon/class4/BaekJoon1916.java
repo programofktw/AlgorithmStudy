@@ -16,7 +16,7 @@ public class BaekJoon1916 {
 
     static int[] moveCost;
 
-    static boolean[] visited;
+
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 
@@ -37,7 +37,6 @@ public class BaekJoon1916 {
     static void initGraph(int N ){
         graph = new int[N+1][N+1];
         moveCost = new int[N+1];
-        visited = new boolean[N+1];
         for(int i = 0 ; i<N+1;i++){
             moveCost[i]= Integer.MAX_VALUE;
             for(int j=0;j<N+1;j++){
