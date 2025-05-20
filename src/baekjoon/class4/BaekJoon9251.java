@@ -6,6 +6,8 @@ import java.io.InputStreamReader;
 
 public class BaekJoon9251 {
 
+    static int[][] dp;
+
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 
@@ -13,6 +15,7 @@ public class BaekJoon9251 {
 
         String second = br.readLine();
 
+        dp = new int[first.length()+1][second.length()+1];
 
         solved(first,second);
 
@@ -20,32 +23,16 @@ public class BaekJoon9251 {
 
     static void solved(String first, String second){
 
-        int result =0;
-        for(int i = 0; i<first.length();i++){
-            char start = first.charAt(i);
-
-            for(int j = 0 ; j<second.length();j++){
-                if(second.charAt(j) == start){
-                    result = Math.max(backTraking(first,second,i,j)+1,result) ;
+        for(int i = 1; i<=first.length();i++){
+            for(int j= 1;j<=second.length();j++){
+                if(first.charAt(i-1) == second.charAt(j-1)){
+                    dp[i][j] = dp[i-1][j-1]+1;
+                } else{
+                    dp[i][j] = Math.max(dp[i-1][j],dp[i][j-1]);
                 }
             }
         }
 
-        System.out.println(result);
+        System.out.println(dp[first.length()][second.length()]);
     }
-
-    static int backTraking(String first, String second, int firstIndex, int secondIndex){
-
-        for(int i = firstIndex+1;i<first.length();i++){
-            char start = first.charAt(i);
-            for(int j = secondIndex+1;j<second.length();j++){
-                if(second.charAt(j)==start){
-                    return backTraking(first,second,i,j)+1;
-                }
-            }
-        }
-
-        return 0;
-    }
-
 }
