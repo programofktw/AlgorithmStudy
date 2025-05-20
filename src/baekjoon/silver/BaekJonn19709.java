@@ -9,21 +9,16 @@ import java.util.StringTokenizer;
 public class BaekJonn19709 {
 
     static PriorityQueue<Integer> priorityQueue = new PriorityQueue<>();
-
+    static int N;
+    static int M;
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        input(br);
+        solved();
+    }
 
-        StringTokenizer st = new StringTokenizer(br.readLine());
-
-        int N = Integer.parseInt(st.nextToken());
-        int M = Integer.parseInt(st.nextToken());
-
-        for(int i = 0 ;i<M;i++) {
-            priorityQueue.add(Integer.parseInt(br.readLine()));
-        }
-
-        int count=0;
-
+    private static void solved() {
+        int count =0 ;
         while(N>=0&&!priorityQueue.isEmpty()){
             int now = priorityQueue.poll();
             N -= now;
@@ -32,5 +27,17 @@ public class BaekJonn19709 {
         }
 
         System.out.print(count);
+    }
+
+    private static void input(BufferedReader br) throws IOException {
+
+        StringTokenizer st = new StringTokenizer(br.readLine());
+
+        N = Integer.parseInt(st.nextToken());
+        M = Integer.parseInt(st.nextToken());
+
+        for(int i = 0 ;i<M;i++) {
+            priorityQueue.add(Integer.parseInt(br.readLine()));
+        }
     }
 }
