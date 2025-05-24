@@ -1,68 +1,35 @@
 package baekjoon.class4;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.StringTokenizer;
-
+import java.util.Scanner;
 public class BaekJoon12865 {
-    static ArrayList<Node> list = new ArrayList<>();
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
 
-    static int K;
-    static int N;
+        int N = sc.nextInt(); // 물품 수
+        int K = sc.nextInt(); // 배낭 최대 무게
 
-    public static void main(String[] args) throws IOException {
-        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        int[] weights = new int[N + 1];
+        int[] values = new int[N + 1];
 
-
-        StringTokenizer st = new StringTokenizer(br.readLine());
-
-        N  = Integer.parseInt(st.nextToken());
-        K  = Integer.parseInt(st.nextToken());
-
-        for(int i = 0 ; i<N;i++){
-            st = new StringTokenizer(br.readLine());
-
-            int weight = Integer.parseInt(st.nextToken());
-
-            int value = Integer.parseInt(st.nextToken());
-
-            list.add(new Node(weight,value));
+        for (int i = 1; i <= N; i++) {
+            weights[i] = sc.nextInt();
+            values[i] = sc.nextInt();
         }
 
-        int contain = backTraking(1,list.get(0).weight,list.get(0).value);
+        int[][] dp = new int[N + 1][K + 1];
 
-        int notContain = backTraking(1,0,0);
-
-
-        System.out.print(Math.max(contain,notContain));
-    }
-
-    static int backTraking(int index,int weight,int value){
-
-        if(weight > K){
-            return 0;
+        // i번째 물건까지 고려했을 때 j 무게까지 담았을 때의 최대 가치
+        for (int i = 1; i <= N; i++) {
+            for (int w = 0; w <= K; w++) {
+                if (weights[i] <= w) {
+                    dp[i][w] = Math.max(dp[i - 1][w], dp[i - 1][w - weights[i]] + values[i]);
+                } else {
+                    dp[i][w] = dp[i - 1][w];
+                }
+            }
         }
-        if(index==N) return value;
 
-        int contain = backTraking(index+1,weight+list.get(index).weight,value+list.get(index).value);
-
-        int notContain = backTraking(index+1, weight,value);
-
-
-        return Math.max(contain,notContain);
-    }
-
-    private static class Node{
-        int weight;
-        int value;
-
-        Node(int weight, int value){
-            this.weight = weight;
-            this.value = value;
-        }
+        System.out.println(dp[N][K]);
     }
 
 
