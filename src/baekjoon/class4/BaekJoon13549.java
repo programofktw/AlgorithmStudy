@@ -30,6 +30,10 @@ public class BaekJoon13549 {
 
         while(!queue.isEmpty()) {
             Node now = queue.poll();
+            if(visited[now.index]){
+                continue;
+            }
+            visited[now.index] = true;
             int preIndex = now.index-1;
             int postIndex = now.index+1;
             int multiIndex = now.index*2;
@@ -40,17 +44,14 @@ public class BaekJoon13549 {
             }
 
             if(preIndex>=0&&!visited[preIndex]){
-                visited[preIndex] = true;
                 queue.add(new Node(preIndex, now.count+1));
             }
 
             if(postIndex < visited.length&&!visited[postIndex]){
-                visited[postIndex] = true;
                 queue.add(new Node(postIndex, now.count+1));
             }
 
-            if(multiIndex <= end *2 && !visited[multiIndex]){
-                visited[multiIndex] = true;
+            if(multiIndex < visited.length && !visited[multiIndex]){
                 queue.add(new Node(multiIndex, now.count));
             }
         }
