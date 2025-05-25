@@ -35,20 +35,22 @@ public class BaekJoon13549 {
             int multiIndex = now.index*2;
 
             if(now.index == end){
-                visited[now.index] =true;
                 System.out.print(now.count);
                 return;
             }
 
-            if(preIndex>=0&&!visited[now.index]){
+            if(preIndex>=0&&!visited[preIndex]){
+                visited[preIndex] = true;
                 queue.add(new Node(preIndex, now.count+1));
             }
 
-            if(postIndex < end&&!visited[postIndex]){
+            if(postIndex < visited.length&&!visited[postIndex]){
+                visited[postIndex] = true;
                 queue.add(new Node(postIndex, now.count+1));
             }
 
-            if(multiIndex!=0&&multiIndex <= end *2 && !visited[multiIndex]){
+            if(multiIndex <= end *2 && !visited[multiIndex]){
+                visited[multiIndex] = true;
                 queue.add(new Node(multiIndex, now.count));
             }
         }
