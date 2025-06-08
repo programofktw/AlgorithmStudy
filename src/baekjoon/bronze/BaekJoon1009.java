@@ -20,6 +20,7 @@ public class BaekJoon1009 {
                 temp%= 10;
             }
 
+            if(temp==0) temp=10;
             System.out.println(temp);
         }
 
