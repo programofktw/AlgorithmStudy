@@ -4,7 +4,6 @@ package baekjoon.silver;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.Queue;
 import java.util.StringTokenizer;
@@ -60,24 +59,25 @@ public class BaekJoon11123 {
             for(int j = 0;j<x;j++){
                 if(!visited[i][j]&&feild[i][j]){
                     queue.add(new Point(i,j));
+                    visited[i][j] = true;
                     result++;
                     while(!queue.isEmpty()){
                         Point now = queue.poll();
-                        visited[now.y][now.x] = true;
                         for(int h = 0;h<4;h++){
                             int nextX = now.x + moveX[h];
                             int nextY = now.y + moveY[h];
 
                             if(nextX<0||nextX>=x||nextY<0||nextY>=y) continue;
-                            else if(!visited[nextY][nextX]&&feild[nextY][nextX]) queue.add(new Point(nextY,nextX));
+                            else if(!visited[nextY][nextX]&&feild[nextY][nextX]){
+                                queue.add(new Point(nextY,nextX));
+                                visited[nextY][nextX] = true;
+                            }
                         }
                     }
                 }
             }
 
         }
-
-
         return result;
     }
 
