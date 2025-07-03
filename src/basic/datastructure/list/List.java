@@ -7,7 +7,7 @@ public interface List<T> extends Base<T> {
     /**
      * 특정 인덱스의 값을 반환
      * */
-    int get(int index);
+    T get(int index);
 
     /**
      * 특정 인덱스의 값 수정.
@@ -18,7 +18,7 @@ public interface List<T> extends Base<T> {
     /**
      * 특정 인덱스의 값을 삭제
      */
-    int delete(int index);
+    void delete(int index);
 
     /**
      * 특정 element를 전체 삭제
@@ -28,7 +28,7 @@ public interface List<T> extends Base<T> {
     /**
      * 특정 element 중 첫번째 삭제
      */
-    int remove(T element);
+    void remove(T element);
 
     /**
      * 특정 값이 존재하는 지 확인
