@@ -1,6 +1,5 @@
 package baekjoon.bronze;
 
-import kotlin._Assertions;
 
 import java.io.BufferedReader;
 import java.io.IOException;
