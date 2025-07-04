@@ -107,14 +107,7 @@ public class ArrayList<T> extends AbstractList<T> implements List<T> {
         return -1;
     }
 
-    @Override
-    public int findLastIndex(T element) {
-        checkNullElement(element);
-        for(int i =size-1 ; i>=0;i--){
-            if(array[i].equals(element)) return i;
-        }
-        return -1;
-    }
+
 
     @SuppressWarnings("unchecked")
     @Override
@@ -178,11 +171,6 @@ public class ArrayList<T> extends AbstractList<T> implements List<T> {
             }
         }
         size = tempSize;
-    }
-
-    @Override
-    public boolean isEmpty() {
-        return size==0;
     }
 
     @SuppressWarnings("unchecked")

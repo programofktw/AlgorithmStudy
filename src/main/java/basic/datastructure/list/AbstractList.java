@@ -8,7 +8,10 @@ public abstract class AbstractList<T> implements List<T>{
         return size;
     }
 
-
+    @Override
+    public boolean isEmpty() {
+        return size==0;
+    }
     protected void checkOutBoundsIndex(int index){
         String errorMessage =  String.format(
                 "배열의 size는 %d 입니다. 요청하신 index %d는 배열의 범위를 벗어났습니다.",
