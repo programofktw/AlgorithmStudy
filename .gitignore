@@ -30,7 +30,7 @@ bin/
 
 /src/test/**
 
-.idea/
+.idea/**
 !.idea/inspectionProfiles
 !.idea/codeStyles
 !.idea/misc.xml
