@@ -29,3 +29,9 @@ bin/
 .DS_Store
 
 /src/test/**
+
+.idea/
+!.idea/inspectionProfiles
+!.idea/codeStyles
+!.idea/misc.xml
+!.idea/modules.xml
