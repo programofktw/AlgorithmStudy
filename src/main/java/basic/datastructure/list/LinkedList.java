@@ -25,6 +25,7 @@ public class LinkedList<T> extends AbstractList<T> implements List<T>{
         Node<T> target = findTargetNode(index);
 
         return target.elemnet;
+
     }
 
     @Override
