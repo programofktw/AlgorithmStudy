@@ -17,9 +17,9 @@ public class BFS {
 
         StringTokenizer st = new StringTokenizer(br.readLine(), " ");
 
-        int y = Integer.parseInt(st.nextToken());
-
         int x = Integer.parseInt(st.nextToken());
+
+        int y = Integer.parseInt(st.nextToken());
 
         field = new boolean[y][x];
 
@@ -46,8 +46,8 @@ public class BFS {
 
         visited[0][0] = true;
 
-        if (!field[0][0]&&!field[field.length-1][field[0].length]) {
-            System.out.println("NO");
+        if (!field[0][0]&&!field[field.length-1][field[0].length-1]) {
+            System.out.println("No");
             return;
         }
 
@@ -55,7 +55,7 @@ public class BFS {
             Node now = queue.poll();
 
             if(now.x == field[0].length-1&&now.y==field.length-1){
-                System.out.print("YES");
+                System.out.print("Yes");
                 return;
             }
 
@@ -69,7 +69,7 @@ public class BFS {
             }
         }
 
-        System.out.print("NO");
+        System.out.print("No");
     }
 
     private static boolean checkIndex(int x, int y){
