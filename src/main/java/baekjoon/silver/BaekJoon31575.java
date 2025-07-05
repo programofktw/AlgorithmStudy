@@ -21,11 +21,14 @@ public class BaekJoon31575 {
 
         int y = Integer.parseInt(st.nextToken());
 
-        field = new boolean[y][x];
+        init(y, x);
+        input(y, br);
+        bfs();
+    }
 
-        visited = new boolean[y][x];
-
-        for(int i = 0 ; i<y;i++){
+    private static void input(int y, BufferedReader br) throws IOException {
+        StringTokenizer st;
+        for(int i = 0; i< y; i++){
             st = new StringTokenizer(br.readLine(), " ");
 
             int j=0;
@@ -35,8 +38,12 @@ public class BaekJoon31575 {
                 field[i][j++]= N==1;
             }
         }
+    }
 
-        bfs();
+    private static void init(int y, int x) {
+        field = new boolean[y][x];
+
+        visited = new boolean[y][x];
     }
 
     public static void bfs(){
