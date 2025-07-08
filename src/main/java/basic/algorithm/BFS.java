@@ -8,84 +8,71 @@ import java.util.Queue;
 import java.util.StringTokenizer;
 
 public class BFS {
-    private static boolean[][] field;
+    public static int[] field = {0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18};
 
-    private static boolean[][] visited;
+    public static void printAsBinaryTree() {
+        int n = field.length;
+        int height = (int) Math.ceil(Math.log(n + 1) / Math.log(2)); // 트리 높이
+        int maxNodeWidth = getMaxWidth(field); // 가장 긴 숫자의 자리수
+        int maxWidth = (int) Math.pow(2, height) * (maxNodeWidth + 2); // 총 가로 폭 (간격 포함)
 
-    public static void main(String[] args) throws IOException {
-        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        int index = 0;
 
-        StringTokenizer st = new StringTokenizer(br.readLine(), " ");
+        for (int level = 0; level < height; level++) {
+            int levelNodeCount = (int) Math.pow(2, level);
+            int spaceBetween = maxWidth / levelNodeCount; // 노드 사이 간격
 
-        int x = Integer.parseInt(st.nextToken());
+            // 시작 여백
+            System.out.print(" ".repeat(spaceBetween / 2 - maxNodeWidth / 2));
 
-        int y = Integer.parseInt(st.nextToken());
+            for (int i = 0; i < levelNodeCount && index < n; i++) {
+                String formatted = String.format("%" + maxNodeWidth + "d", field[index++]);
+                System.out.print(formatted);
 
-        field = new boolean[y][x];
-
-        visited = new boolean[y][x];
-
-        for(int i = 0 ; i<y;i++){
-            st = new StringTokenizer(br.readLine(), " ");
-
-            int j=0;
-            while(st.hasMoreTokens()){
-                int N = Integer.parseInt(st.nextToken());
-
-                field[i][j++]= N==1;
+                // 간격
+                if (i != levelNodeCount - 1) {
+                    System.out.print(" ".repeat(spaceBetween - maxNodeWidth));
+                }
             }
-        }
 
-        bfs();
+            System.out.println();
+        }
     }
 
-    public static void bfs(){
-        Queue<Node> queue = new LinkedList<>();
-
-        queue.add(new Node(0,0));
-
-        visited[0][0] = true;
-
-        if (!field[0][0]&&!field[field.length-1][field[0].length-1]) {
-            System.out.println("No");
-            return;
+    // 숫자 중 가장 긴 자리수 계산
+    private static int getMaxWidth(int[] arr) {
+        int maxLen = 0;
+        for (int num : arr) {
+            int len = String.valueOf(num).length();
+            if (len > maxLen) maxLen = len;
         }
+        return maxLen;
+    }
+
+    public static void main(String[] args){
+        printAsBinaryTree();
+        System.out.print("BFS : ");
+        bfs(0);
+    }
+
+    private static void bfs(int index){
+        Queue<Integer> queue = new LinkedList<>();
+        queue.add(0);
 
         while(!queue.isEmpty()){
-            Node now = queue.poll();
+            int parent = queue.poll();
+            System.out.print(parent+" -> ");
+            int left = parent*2+1;
+            int right = parent*2+2;
 
-            if(now.x == field[0].length-1&&now.y==field.length-1){
-                System.out.print("Yes");
-                return;
-            }
-
-            if(checkIndex(now.x+1,now.y)&&!visited[now.y][now.x+1]&&field[now.y][now.x+1]){
-                visited[now.y][now.x+1] = true;
-                queue.add(new Node(now.x+1,now.y));
-            }
-            if(checkIndex(now.x,now.y+1)&&!visited[now.y+1][now.x]&&field[now.y+1][now.x]){
-                visited[now.y+1][now.x] = true;
-                queue.add(new Node(now.x,now.y+1));
+            if(left>=field.length) continue;
+            else if(right>=field.length) queue.add(left);
+            else{
+                queue.add(left);
+                queue.add(right);
             }
         }
 
-        System.out.print("No");
     }
 
-    private static boolean checkIndex(int x, int y){
-        if (y < 0 || y >= field.length) return false;
-        if (x < 0 || x >= field[0].length) return false;
-
-        return true;
-    }
-
-    private static class Node{
-        int x;
-        int y;
-
-        public Node(int x, int y){
-            this.x = x;
-            this.y = y;
-        }
-    }
 }
