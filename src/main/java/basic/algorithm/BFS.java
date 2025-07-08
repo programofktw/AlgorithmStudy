@@ -52,12 +52,12 @@ public class BFS {
     public static void main(String[] args){
         printAsBinaryTree();
         System.out.print("BFS : ");
-        bfs(0);
+        bfs();
     }
 
-    private static void bfs(int index){
+    private static void bfs(){
         Queue<Integer> queue = new LinkedList<>();
-        queue.add(index);
+        queue.add(0);
 
         while(!queue.isEmpty()){
             int parent = queue.poll();
