@@ -1,6 +1,6 @@
 package alogorithm.baekjoon;
 
-import basic.bfs.BFS;
+import basic.algorithm.BFS;
 import org.junit.jupiter.api.Test;
 
 public class BaekJoonTest {
