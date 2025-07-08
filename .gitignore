@@ -31,3 +31,4 @@ bin/
 /src/test/**
 
 .gradle/**
+.idea/**
