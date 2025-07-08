@@ -4,7 +4,7 @@ import basic.datastructure.list.ArrayList;
 
 public class ListMap<K,V> extends AbstractMap<K, V> {
 
-    ArrayList<Node<K,V>> list;
+    ArrayList<Node> list;
 
     public ListMap(){
         list = new ArrayList<>();
@@ -26,7 +26,7 @@ public class ListMap<K,V> extends AbstractMap<K, V> {
         checkNullKey(key);
         int index = findIndexByKey(key);
 
-        if(index==-1) list.add(new Node<>(key,value));
+        if(index==-1) list.add(new Node(key,value));
 
         else list.get(index).setValue(value);
     }
