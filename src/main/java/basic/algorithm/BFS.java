@@ -57,7 +57,7 @@ public class BFS {
 
     private static void bfs(int index){
         Queue<Integer> queue = new LinkedList<>();
-        queue.add(0);
+        queue.add(index);
 
         while(!queue.isEmpty()){
             int parent = queue.poll();
