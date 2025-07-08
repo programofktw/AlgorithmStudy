@@ -17,5 +17,9 @@ public interface Map<K,V> {
     boolean isEmpty();
 
 
-
+    interface Entry<K, V> {
+        K getKey();
+        V getValue();
+        V setValue(V value);
+    }
 }
