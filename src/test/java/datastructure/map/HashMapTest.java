@@ -6,6 +6,8 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+//통과
+//이후 Resize HashMap을 만들었을때를 대비해 수행 시간도 기록
 public class HashMapTest {
 
     private HashMap<String, Integer> map;
