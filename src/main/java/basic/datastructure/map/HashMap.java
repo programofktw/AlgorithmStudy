@@ -1,7 +1,6 @@
 package basic.datastructure.map;
 
 import basic.datastructure.list.ArrayList;
-import basic.datastructure.list.LinkedList;
 
 public class HashMap<K,V> extends AbstractMap<K,V> {
 
@@ -23,38 +22,86 @@ public class HashMap<K,V> extends AbstractMap<K,V> {
 
     @Override
     public void put(K key, V value) {
-        int hash = Math.abs(key.hashCode()) % hashMap.getCapacity();
+        checkNullKey(key);
+        int hash = hash(key);
 
         Node node = hashMap.get(hash);
 
         while(node.next!=null){
+            node = node.getNext();
             if(node.getKey().equals(key)){
                 node.setValue(value);
                 return;
             }
-            node = node.next;
         }
+
+        node.setNext(new Node(key,value));
         size++;
     }
 
     @Override
     public boolean containsKey(K key) {
+        checkNullKey(key);
+        int hash = hash(key);
+
+        Node node = hashMap.get(hash).getNext();
+
+        while(node != null){
+            if(node.getKey().equals(key)){
+                return true;
+            }
+            node = node.getNext();
+        }
+
         return false;
     }
 
     @Override
     public V get(K key) {
+        checkNullKey(key);
+        int hash = hash(key);
+
+        Node node = hashMap.get(hash).getNext();
+
+        while(node!=null){
+            if(node.getKey().equals(key)){
+                return node.getValue();
+            }
+            node = node.getNext();
+        }
+
         return null;
     }
 
     @Override
     public V remove(K key) {
+        checkNullKey(key);
+        int hash = hash(key);
+
+        Node pre = hashMap.get(hash);
+        Node node = pre.next;
+        while(node != null){
+            if(node.key.equals(key)){
+                pre.setNext(node.getNext());
+                size--;
+                return node.value;
+            }
+            pre = node;
+            node = node.getNext();
+        }
+
         return null;
     }
 
     @Override
     public void clear() {
+        hashMap = new ArrayList<>(DEFAULT_SIZE);
 
+        for(int i = 0 ; i < hashMap.getCapacity();i++){
+            hashMap.add(new Node(null,null));
+        }
+
+        size = 0;
     }
 
     @Override
@@ -64,7 +111,11 @@ public class HashMap<K,V> extends AbstractMap<K,V> {
 
     @Override
     public boolean isEmpty() {
-        return false;
+        return size==0;
+    }
+
+    private int hash(K key){
+        return Math.abs(key.hashCode()) % hashMap.getCapacity();
     }
 
     private class Node implements Map.Entry<K,V>{
