@@ -1,0 +1,1 @@
+select ID, LENGTH from FISH_INFO where LENGTH is Not null order by LENGTH DESC, ID ASC limit 10
