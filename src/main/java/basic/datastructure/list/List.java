@@ -41,11 +41,6 @@ public interface List<T> extends Base<T> {
      */
     int findFirstIndex(T element);
 
-    /**
-     * 특정 값을 뒤에서부터 탐색하여 몇번째 인덱스에 있는지 확인
-     * 없으면 -1 반환
-     */
-    int findLastIndex(T element);
 
     /**
      * 특정 값을 맨마지막에 추가

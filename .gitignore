@@ -30,7 +30,8 @@ bin/
 
 /src/test/**
 
+.gradle/**
 .idea/**
 
-.gradle/
-build/
+build/**
+src/main/resources/application.properties
