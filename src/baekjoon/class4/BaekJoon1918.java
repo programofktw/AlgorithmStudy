@@ -29,32 +29,45 @@ public class BaekJoon1918 {
                 else if (now == ')') {
                     //우선 stack의 top을 pop
                     Character top = stack.pop();
-                    //stack
+                    //stack의 top이 '(' 가 나올 때까지 반복
                     while (!(top == '(')) {
+                        // pop 된 top의 경우 결과에 출력
                         sb.append(top);
+                        // '('는 출력되지 않도록 출력 이후에 pop
                         top = stack.pop();
                     }
+                // '(' 도 ')' 도 아닌 경우
                 } else {
+                    //stack이 비었으면 뭐든 상관 없이 push
                     if (stack.empty())
                         stack.push(now);
                     else {
+                        //stack이 비지 않았으면 자신보다 레벨이 같거나 높은 op를 모두 pop
+                        // + 보다 레벨이 높은 *, /, 레벨이 같은 + - 모두 pop
                         while (!stack.empty() && Operation.isOrder(now, stack.peek())) {
                             sb.append(stack.pop());
                         }
+                        // 모두 pop을 한 뒤 now를 push
                         stack.push(now);
                     }
                 }
+            // 피연산인 경우 바로 출력
             } else {
                 sb.append(now);
             }
         }
+
+        // 입력에 대한 처리가 끝난 이후 stack을 비워줌
         while(!stack.empty()) {
             sb.append(stack.pop());
         }
+
+        //결과 출력
         System.out.print(sb);
     }
 
 
+    //연산자에 대한 정보를 처리
     private static class Operation{
         static Map<Character, Integer> operationLevel = new HashMap<>();
 
@@ -67,10 +80,14 @@ public class BaekJoon1918 {
             operationLevel.put(')',0);
         }
 
+        //특정 Char가 Operation 인지 피연산자인지 구분
         public static boolean isOperation(char ch){
             return operationLevel.containsKey(ch);
         }
 
+        //연산자끼리의 비교에서 레벨 수준 비교
+        //pop 해야하는 경우 어디까지 pop을 할지 정하게 됨
+        //pop하는 기준은 자기 보다 우선순위가 높거나 같은 경우 까지.
         public static boolean isOrder(char a, char b){
             return operationLevel.get(a) <= operationLevel.get(b);
         }
