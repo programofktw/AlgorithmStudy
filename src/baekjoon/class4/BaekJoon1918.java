@@ -10,7 +10,6 @@ import java.util.StringTokenizer;
 
 public class BaekJoon1918 {
     static BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-
     public static void main(String[] args) throws IOException {
         String input = br.readLine();
 
@@ -21,28 +20,26 @@ public class BaekJoon1918 {
         StringBuilder sb = new StringBuilder();
 
 
-        for(int i = 0 ; i < token.length;i++){
-            char now = token[i];
-            if(Operation.isOperation(now)){
-                if(now=='(') stack.push(now);
-                else if(now==')'){
-                    Character pop=stack.pop();
-                    while(!(pop=='(')){
+        for (char now : token) {
+            if (Operation.isOperation(now)) {
+                if (now == '(') stack.push(now);
+                else if (now == ')') {
+                    Character pop = stack.pop();
+                    while (!(pop == '(')) {
                         sb.append(pop);
-                        pop =stack.pop();
+                        pop = stack.pop();
                     }
-                }
-                else{
-                    if(stack.empty())
+                } else {
+                    if (stack.empty())
                         stack.push(now);
-                    else{
-                        while(!stack.empty()&&Operation.isOrder(now,stack.peek())){
+                    else {
+                        while (!stack.empty() && Operation.isOrder(now, stack.peek())) {
                             sb.append(stack.pop());
                         }
                         stack.push(now);
                     }
                 }
-            }else{
+            } else {
                 sb.append(now);
             }
         }
