@@ -11,23 +11,28 @@ import java.util.StringTokenizer;
 public class BaekJoon1918 {
     static BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
     public static void main(String[] args) throws IOException {
+        //평범한 식 입력
         String input = br.readLine();
-
+        //식을 한글자씩 나누기
         char[] token = input.toCharArray();
-
+        //연산자를 저장할 Stack 생성
         Stack<Character> stack = new Stack<>();
-
+        //결과 출력 변수 생성
         StringBuilder sb = new StringBuilder();
-
-
+        //한글자씩 검증 시작
         for (char now : token) {
+            //연산자의 경우
             if (Operation.isOperation(now)) {
+                //'(' 일경우 그냥 push'('이후에 쌓이는 것들이 ')'을 만났을 때 pop 될 구분점"
                 if (now == '(') stack.push(now);
+                //')'의 경우 ( 보다 늦게 쌓인 것들을 pop
                 else if (now == ')') {
-                    Character pop = stack.pop();
-                    while (!(pop == '(')) {
-                        sb.append(pop);
-                        pop = stack.pop();
+                    //우선 stack의 top을 pop
+                    Character top = stack.pop();
+                    //stack
+                    while (!(top == '(')) {
+                        sb.append(top);
+                        top = stack.pop();
                     }
                 } else {
                     if (stack.empty())
