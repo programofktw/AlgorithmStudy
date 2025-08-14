@@ -14,7 +14,7 @@ public class BaekJoon1918 {
     public static void main(String[] args) throws IOException {
         String input = br.readLine();
 
-        String[] token = input.split("");
+        char[] token = input.toCharArray();
 
         Stack<Character> stack = new Stack<>();
 
@@ -22,25 +22,30 @@ public class BaekJoon1918 {
 
 
         for(int i = 0 ; i < token.length;i++){
-            char now = token[i].charAt(0);
+            char now = token[i];
             if(Operation.isOperation(now)){
-                if(now==')'){
+                if(now=='(') stack.push(now);
+                else if(now==')'){
                     Character pop=stack.pop();
                     while(!(pop=='(')){
                         sb.append(pop);
+                        pop =stack.pop();
                     }
                 }
                 else{
-                    stack.push(now);
+                    if(stack.empty())
+                        stack.push(now);
+                    else{
+                        while(!stack.empty()&&Operation.isOrder(now,stack.peek())){
+                            sb.append(stack.pop());
+                        }
+                        stack.push(now);
+                    }
                 }
             }else{
                 sb.append(now);
             }
         }
-
-
-
-
         while(!stack.empty()) {
             sb.append(stack.pop());
         }
@@ -56,8 +61,8 @@ public class BaekJoon1918 {
             operationLevel.put('-',1);
             operationLevel.put('*',2);
             operationLevel.put('/',2);
-            operationLevel.put('(',3);
-            operationLevel.put(')',3);
+            operationLevel.put('(',0);
+            operationLevel.put(')',0);
         }
 
         public static boolean isOperation(char ch){
@@ -65,7 +70,7 @@ public class BaekJoon1918 {
         }
 
         public static boolean isOrder(char a, char b){
-            return operationLevel.get(a) < operationLevel.get(b);
+            return operationLevel.get(a) <= operationLevel.get(b);
         }
     }
 }
