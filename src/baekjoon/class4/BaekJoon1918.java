@@ -6,7 +6,6 @@ import java.io.InputStreamReader;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Stack;
-import java.util.StringTokenizer;
 
 public class BaekJoon1918 {
     static BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
