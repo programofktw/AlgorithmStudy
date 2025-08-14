@@ -26,6 +26,10 @@ public class ArrayList<T> extends AbstractList<T> implements List<T> {
         this.size = array.getSize();
     }
 
+    public int getCapacity(){
+        return array.length;
+    }
+
     @Override
     public T get(int index) {
         checkOutBoundsIndex(index);
