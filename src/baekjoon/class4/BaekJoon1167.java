@@ -1,8 +1,5 @@
 package baekjoon.class4;
 
-import basic.datastructure.map.HashMap;
-import basic.datastructure.map.Map;
-
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
