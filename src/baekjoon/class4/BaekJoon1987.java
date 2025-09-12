@@ -48,9 +48,9 @@ public class BaekJoon1987 {
     }
 
     private static int dfs(int r, int c, int weight){
-        if(visitedAlph[field[r][c] - 'A']) return weight;
+        if(visitedAlph[charToIndex(r, c)]) return weight;
 
-        visitedAlph[field[r][c] - 'A'] = true;
+        visitedAlph[charToIndex(r, c)] = true;
 
         int max = weight;
 
@@ -61,7 +61,7 @@ public class BaekJoon1987 {
             }
         }
 
-        visitedAlph[field[r][c]-'A'] = false;
+        visitedAlph[charToIndex(r, c)] = false;
         return max;
     }
 
@@ -74,9 +74,13 @@ public class BaekJoon1987 {
 
         if(c<0) return false;
 
-        if(visitedAlph[field[r][c] - 'A']) return false;
+        if(visitedAlph[charToIndex(r, c)]) return false;
 
         return true;
+    }
+
+    private static int charToIndex(int r, int c) {
+        return field[r][c] - 'A';
     }
 
     private class Node{
