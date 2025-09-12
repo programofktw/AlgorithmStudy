@@ -4,36 +4,24 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
-/*
-별찍기 - 12
- */
 public class BaekJoon2522 {
 
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        int n = Integer.parseInt(br.readLine());
 
-        int input = Integer.parseInt(br.readLine());
+        StringBuilder sb = new StringBuilder();
 
-        for(int i = input ; i>0;i--){
-            for(int j = 1;j<=input;j++){
-                if (j>=i){
-                    System.out.print("*");
-                }else{
-                    System.out.print(" ");
-                }
-            }
-            System.out.println();
+        // 위쪽 삼각형
+        for (int i = 1; i <= n; i++) {
+            sb.append(" ".repeat(n - i)).append("*".repeat(i)).append("\n");
         }
 
-        for(int i = 1; i<input;i++){
-            for(int j = 1;j<=input;j++){
-                if (j>i){
-                    System.out.print("*");
-                }else{
-                    System.out.print(" ");
-                }
-            }
-            System.out.println();
+        // 아래쪽 삼각형
+        for (int i = n - 1; i >= 1; i--) {
+            sb.append(" ".repeat(n - i)).append("*".repeat(i)).append("\n");
         }
+
+        System.out.print(sb);
     }
 }
