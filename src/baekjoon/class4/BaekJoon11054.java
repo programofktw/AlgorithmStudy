@@ -23,12 +23,48 @@ public class BaekJoon11054 {
         }
 
 
-        System.out.print(solution(array));
+        System.out.print(dpSolution(array));
     }
 
 
     public static int solution(int[] array){
         return Math.max(dfs(array,1,0,0,false),dfs(array,1,1,array[0],false));
+    }
+
+    public static int dpSolution(int[] array){
+
+        int n = array.length;
+
+        //증가 함수
+        int[] LIS = new int[array.length];
+
+        //감소 배열
+        int[] LDS = new int[array.length];
+
+        // 증가 부분 수열
+        for (int i = 0; i < n; i++) {
+            LIS[i] = 1;
+            for (int j = 0; j < i; j++) {
+                if (array[j] < array[i]) LIS[i] = Math.max(LIS[i], LIS[j] + 1);
+            }
+        }
+
+        // 감소 부분 수열
+        for (int i = n - 1; i >= 0; i--) {
+            LDS[i] = 1;
+            for (int j = n - 1; j > i; j--) {
+                if (array[j] < array[i]) LDS[i] = Math.max(LDS[i], LDS[j] + 1);
+            }
+        }
+
+        int answer = 0;
+
+        for(int i = 0 ; i<n;i++){
+            answer = Math.max(answer, LIS[i] + LDS[i] - 1);
+        }
+
+
+        return answer;
     }
 
     //dfs 시간초과
