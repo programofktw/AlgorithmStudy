@@ -31,6 +31,7 @@ public class BaekJoon11054 {
         return Math.max(dfs(array,1,0,0,false),dfs(array,1,1,array[0],false));
     }
 
+    //dfs 시간초과
     public static int dfs(int[] array,int index,int length, int lastNum, boolean isReverse){
         int max =0;
 
