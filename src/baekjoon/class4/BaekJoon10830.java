@@ -5,7 +5,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.StringTokenizer;
 
-public class BaekJoon2638 {
+public class BaekJoon10830 {
 
     static BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 
@@ -15,8 +15,7 @@ public class BaekJoon2638 {
         StringTokenizer st = new StringTokenizer(br.readLine());
 
         int N = Integer.parseInt(st.nextToken());
-
-        Long B = Long.parseLong(st.nextToken());
+        long B = Long.parseLong(st.nextToken());
 
         int[][] A = new int[N][N];
 
