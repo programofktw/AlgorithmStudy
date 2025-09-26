@@ -11,59 +11,41 @@ public class BaekJoon14647 {
 
     static StringBuilder sb = new StringBuilder();
 
-    static int[][] bingo;
     public static void main(String[] args) throws IOException {
         StringTokenizer st = new StringTokenizer(br.readLine());
 
         int n = Integer.parseInt(st.nextToken());
-
         int m = Integer.parseInt(st.nextToken());
 
-        bingo = new int[n][m];
+        int[][] arr = new int[n][m];
 
-        //가로로 9의 개수를 찾기 위해 하나의 String으로 구성하는 것
-        String[] X9 = new String[n];
+        int total9num = 0;
+        int[] rowCount = new int[n];
+        int[] colCount = new int[m];
 
-        //세로로 9의 개수를 찾기 위해 하나의 String으로 구성하는 것
-        String[] Y9 = new String[m];
-
-        //입력
-        for(int i= 0 ; i < n ;i++){
+        // 입력 및 9 카운팅
+        for (int i = 0; i < n; i++) {
             st = new StringTokenizer(br.readLine());
-
-            int j =0;
-            while(st.hasMoreTokens()){
+            for (int j = 0; j < m; j++) {
                 String s = st.nextToken();
-                X9[i]+= s;
-                Y9[j++]+= s;
+                arr[i][j] = Integer.parseInt(s);
+
+                // 9의 개수 세기
+                for (char c : s.toCharArray()) {
+                    if (c == '9') {
+                        total9num++;
+                        rowCount[i]++;
+                        colCount[j]++;
+                    }
+                }
             }
         }
 
-
-        int total9num =0;
-
+        // 최대 9 개수 찾기 (행/열)
         int max9Num = 0;
-        for(int i = 0 ; i < n;i++){
-            int temp9Num = 0;
-            for(char text : X9[i].toCharArray()){
-                if(text=='9'){
-                    total9num++;
-                    temp9Num++;
-                }
-            }
-            max9Num = Math.max(temp9Num, max9Num);
-        }
+        for (int r : rowCount) max9Num = Math.max(max9Num, r);
+        for (int c : colCount) max9Num = Math.max(max9Num, c);
 
-        for(int j = 0 ; j < m ; j++){
-            int temp9Num = 0;
-            for(char text : Y9[j].toCharArray()){
-                if(text=='9'){
-                    temp9Num++;
-                }
-            }
-            max9Num = Math.max(temp9Num, max9Num);
-        }
-
-        System.out.print(total9num-max9Num);
+        System.out.println(total9num - max9Num);
     }
 }
