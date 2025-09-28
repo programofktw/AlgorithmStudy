@@ -32,72 +32,48 @@ public class BaekJoon17070 {
             }
         }
 
-        //대각, 가로, 세로
-        int[][] move = {{1,1},{1,0},{0,1}};
-        //가로
+
+
+
+        //가로 x, y 에서 가로 방향으로 파이프를 두었을 때 가능한 경우의 수
         long[][] gdp = new long[n][n];
-        //세로
+
+        //가로 x, y 에서 세로ㅜ방향으로 파이프를 두었을 때 가능한 경우의 수
         long[][] sdp = new long[n][n];
-        //대각
+
+        //가로 x, y 에서 대각 방향으로 파이프를 두었을 때 가능한 경우의 수
         long[][] cdp = new long[n][n];
 
+        gdp[0][1] = 1;
 
-        for(int i = n-1 ; i>=0;i--){
-            for(int j = n-1;j>=0;j--){
-                //도착지 초기화.
-                if(i==n-1&&j==n-1){
-                    gdp[n-1][n-1] = 0;
-                    sdp[n-1][n-1] = 0;
-                    cdp[n-1][n-1] = 0;
-                    continue;
+
+        for (int y = 0; y < n; y++) {
+            for (int x = 0; x < n; x++) {
+                if (!field[y][x]) continue; // 벽이면 스킵
+
+                // 가로 -> 가로, 대각선
+                if (canRightMove(x,y,n)) {
+                    gdp[y][x + 1] += gdp[y][x]; // 가로 유지
+                    gdp[y][x + 1] += cdp[y][x]; // 대각선에서 가로
                 }
 
-                //도착지 위칸
-                if(i==n-2&&j==n-1){
-                   gdp[i][j] = 0;
-                   sdp[i][j] = 1;
-                   cdp[i][j] = 0;
-                   continue;
+                // 세로 -> 세로, 대각선
+                if (canDownMove(x,y,n)) {
+                    sdp[y + 1][x] += sdp[y][x]; // 세로 유지
+                    sdp[y + 1][x] += cdp[y][x]; // 대각선에서 세로
                 }
 
-                if(i==n-2&&j==n-2){
-                    gdp[i][j] = 0;
-                    sdp[i][j] = 0;
-                    cdp[i][j] = 1;
-                    continue;
-                }
-                if(i==n-1&&j==n-2){
-                    gdp[i][j] = 1;
-                    sdp[i][j] = 0;
-                    cdp[i][j] = 0;
-                    continue;
-                }
-
-                for(int h=0;h<3;h++){
-                    int nextX = j + move[h][0];
-                    int nextY = i + move[h][1];
-                    if(h==0){
-                        if(canCrossMove(j,i,n)){
-                            cdp[i][j] += cdp[nextY][nextX] + gdp[nextY][nextX] + sdp[nextY][nextX];
-                        }
-                        //가로
-                    }else if(h==1){
-                        if(canRightMove(j,i,n)){
-                            gdp[i][j] += cdp[nextY][nextX] + gdp[nextY][nextX];
-                        }
-                        //세로
-                    }else{
-                        if(canDownMove(j,i,n)){
-                            sdp[i][j] += cdp[nextY][nextX] + sdp[nextY][nextX];
-                        }
-                    }
+                // 대각선 -> 가로/세로/대각선
+                if (canCrossMove(x,y,n)) {
+                    cdp[y + 1][x + 1] += gdp[y][x]; // 가로 → 대각선
+                    cdp[y + 1][x + 1] += sdp[y][x]; // 세로 → 대각선
+                    cdp[y + 1][x + 1] += cdp[y][x]; // 대각선 → 대각선
                 }
             }
         }
 
-        long result = 0 ;
+        long result = gdp[n - 1][n - 1] + sdp[n - 1][n - 1] + cdp[n - 1][n - 1];
 
-        result = gdp[0][0];
 
         System.out.print(result);
 
