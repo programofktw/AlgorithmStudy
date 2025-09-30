@@ -3,12 +3,11 @@ package baekjoon.class4;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.Arrays;
-import java.util.Comparator;
-import java.util.PriorityQueue;
-import java.util.StringTokenizer;
+import java.util.*;
 
 //1회차 메모리 초과
+//시도 변경 dp 대신 bfs를 하되 add 하기전 time이 minTime 보다 큰지 확인.
+//Periority Queue -> Queue 변경 : 시간복잡도는 좀 버려도 공간 복잡도 살려보기
 public class BaekJoon12851 {
 
     static BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
@@ -33,45 +32,53 @@ public class BaekJoon12851 {
 
     }
 
-    private static void bfs(int from, int to){
-        PriorityQueue<Node> queue = new PriorityQueue<>(
-                Comparator.comparingInt(node->node.time)
-        );
+    private static void bfs(int from, int to) {
 
-        queue.add(new Node(from,0));
+        int MAX = 100000;
+        int[] visited = new int[MAX + 1];  // -1이면 방문 안함, 아니면 방문 시간 기록
+
+        Arrays.fill(visited, -1);
+
+        Queue<Integer> queue = new LinkedList<>();
+        queue.add(from);
+        visited[from] = 0;
 
         int minTime = Integer.MAX_VALUE;
-
         int count = 0;
 
-        while(!queue.isEmpty()){
-            Node now = queue.poll();
+        while (!queue.isEmpty()) {
+            int now = queue.poll();
 
-            //만약 최소 시간보다 초과한 경우 볼 필요가 없음.
-            if(now.time > minTime){
+            int time = visited[now];
+
+            //목적지에 도착
+            if (now == to) {
+                if (time < minTime) {
+                    minTime = time;
+                    count = 1;
+                } else if (time == minTime) {
+                    count++;
+                }
                 continue;
             }
 
-            if(now.X == to){
-                int time = now.time;
+            //최소 시간보다도 클때
+            if (time + 1 > minTime) continue;
 
-                if(time==minTime){
-                    count++;
-                }
+            int[] next = {now - 1, now + 1, now * 2};
 
-                else if(time < minTime){
-                    minTime = time;
-                    count = 1;
+            for (int nx : next) {
+                if (nx < 0 || nx > MAX) continue;
+
+                //아직 방문을 하지 않았거나 또 방문을 했는 데 시간이 같다(같은 시간에 다른 경로로 왔다)
+                if (visited[nx] == -1 || visited[nx] == time + 1) {
+                    visited[nx] = time + 1;
+                    queue.add(nx);
                 }
-            }
-            else if(now.X != to){
-                queue.add(new Node(now.X +1,now.time+1));
-                queue.add(new Node(now.X -1,now.time+1));
-                queue.add(new Node(now.X  * 2,now.time+1));
             }
         }
-
-        System.out.print(minTime+"\n"+count);
+        System.out.println(minTime);
+        System.out.println(count);
     }
 
     static class Node{
