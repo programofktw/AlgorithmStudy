@@ -8,6 +8,7 @@ import java.util.Comparator;
 import java.util.PriorityQueue;
 import java.util.StringTokenizer;
 
+//1회차 메모리 초과
 public class BaekJoon12851 {
 
     static BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
