@@ -84,6 +84,7 @@ public class BaekJoon12851 {
     static class Node{
         int X;
 
+
         int time;
 
         Node(int X, int time){
