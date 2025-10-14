@@ -3,6 +3,7 @@ package baekjoon.class4;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.Stack;
 
 public class BaekJoon9935 {
     static BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
@@ -15,13 +16,41 @@ public class BaekJoon9935 {
         String boomText = br.readLine();
 
 
-        int preTextLength;
-        do{
-            preTextLength = text.length();
-            text = text.replaceAll(boomText,"");
-            if(text.isEmpty()) break;
-        }while(preTextLength!=text.length());
+        Stack<Character> stack = new Stack<>();
 
-        System.out.println((text.isEmpty())?"FRULA":text);
+        A : for(char now :  text.toCharArray()){
+            if(now==boomText.charAt(boomText.length()-1)){
+                Stack<Character> transaction = new Stack<>();
+                for(int i = boomText.length()-2; i>=0;i--){
+                    if(stack.isEmpty()){
+                        rollback(stack, transaction);
+                        stack.push(now);
+                        continue A;
+                    }
+                    char stackPop = stack.pop();
+                    transaction.push(stackPop);
+                    if(boomText.charAt(i)!=stackPop){
+                        rollback(stack,transaction);
+                        stack.push(now);
+                        continue A;
+                    }
+                }
+            }else{
+                stack.push(now);
+            }
+        }
+
+        while(!stack.isEmpty()){
+            sb.append(stack.pop());
+        }
+        sb.reverse();
+
+        System.out.println(sb.toString().isEmpty()?"FRULA":sb);
+    }
+
+    private static void rollback(Stack<Character> stack, Stack<Character> transaction) {
+        while(!transaction.isEmpty()){
+            stack.push(transaction.pop());
+        }
     }
 }
