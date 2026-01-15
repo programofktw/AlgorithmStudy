@@ -1,6 +1,6 @@
-package basic.algorithm;
+package basic.dfs;
 
-import java.io.FilterOutputStream;
+import basic.algorithm.AbstractTreeAlogorithm;
 
 
 /*
@@ -10,7 +10,7 @@ import java.io.FilterOutputStream;
 
 dfs 의 경우 0 1 3 4 5 6
  */
-public class DFS extends AbstractTreeAlogorithm{
+public class TreeDFS extends AbstractTreeAlogorithm {
 
     public static void main(String[] args){
         printAsBinaryTree();
