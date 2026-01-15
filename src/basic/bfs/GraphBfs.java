@@ -7,7 +7,7 @@ import java.util.LinkedList;
 import java.util.Queue;
 import java.util.StringTokenizer;
 
-public class BFS {
+public class GraphBfs {
     private static boolean[][] field;
 
     private static boolean[][] visited;

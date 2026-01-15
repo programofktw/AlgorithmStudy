@@ -1,13 +1,10 @@
-package basic.algorithm;
+package basic.bfs;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
+import basic.algorithm.AbstractTreeAlogorithm;
 import java.util.LinkedList;
 import java.util.Queue;
-import java.util.StringTokenizer;
 
-public class BFS  extends AbstractTreeAlogorithm{
+public class TreeBFS extends AbstractTreeAlogorithm {
 
     public static void main(String[] args){
         printAsBinaryTree();
