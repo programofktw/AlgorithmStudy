@@ -21,6 +21,11 @@ public class GraphDFS extends AbstractGraphAlgorithm {
         System.out.print("열(col): ");
         int startCol = Integer.parseInt(br.readLine());
 
+        if(field[startRow][startCol] == 0){
+            System.out.println("시작 지점이 이동 불가능합니다.");
+            return;
+        }
+
         dfs.dfs(startRow, startCol);
     }
 
