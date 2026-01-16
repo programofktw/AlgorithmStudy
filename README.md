@@ -3,6 +3,8 @@
 # 알고리즘
 - bfs
     - [BFS 코드 구현](https://github.com/programofktw/AlgorithmStudy/pull/127)
+       - 트리 BFS
+       - 2차원 배열 BFS
     - 우선순위 bfs 정리
  
 - dfs
@@ -23,6 +25,7 @@
 
 - HashMap
   - [HashMap 구현](https://github.com/programofktw/AlgorithmStudy/pull/135)
+
 
 
 
