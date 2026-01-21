@@ -1,6 +1,5 @@
 package baekjoon.silver;
 
-import java.awt.desktop.PreferencesEvent;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -18,7 +17,6 @@ public class B1926 {
 
     private static boolean[][] visited;
 
-    private static Queue<Node> queue = new LinkedList<>();
 
     private static int artNum = 0;
     private static int maxNum =0;
@@ -71,6 +69,8 @@ public class B1926 {
     private static int[] dy = {0,-1,0,1};
 
     private static void bfs(int y, int x){
+        Queue<Node> queue = new LinkedList<>();
+
         queue.add(new Node(y,x));
         int count=0;
 
