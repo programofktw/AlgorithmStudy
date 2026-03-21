@@ -21,17 +21,8 @@ public class B34823 {
 
         int p = inputs[2];
 
-        int result=0;
+        int result=Math.min(Math.min(y,p),c/2);
 
-        while(true){
-            y--;
-            c-=2;
-            p--;
-
-            if(y<0||c<0||p<0) break;
-
-            result++;
-        }
 
         sb.append(result);
 
