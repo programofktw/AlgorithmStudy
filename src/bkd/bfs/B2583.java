@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.LinkedList;
 import java.util.Queue;
 
@@ -92,14 +93,12 @@ public class B2583 {
             }
         }
 
-        Object[] array = area.toArray();
-
-        Arrays.sort(array);
+        Collections.sort(area);
 
         sb.append(areaNum).append("\n");
 
-        for(int i = 0 ; i < array.length;i++){
-            sb.append(array[i]).append(" ");
+        for(int i = 0 ; i < area.size();i++){
+            sb.append(area.get(i)).append(" ");
         }
 
         System.out.print(sb);
